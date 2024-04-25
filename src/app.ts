@@ -1,16 +1,31 @@
-import express, { Request, Response } from 'express'
+import express, { Request, Response, Application } from 'express'
+import cors from 'cors'
+import userRoute from './routes/user'
+import RouterMiddleware from './middlewares/middleware'
+import authRoute from './routes/authentication'
 
-const app = express()
-const port = process.env.PORT || 8080
+const port:Number = 8080
+const app: Application = express()
 
-app.get('/', (_req: Request, res: Response) => {
-  return res.send('Express Typescript on Vercel')
-})
+const start = async (app: Application) => {
+    app.use(cors());
+    app.use(express.json())
+    app.get("/", (req: Request, res: Response)=>{
+        try {
+            res.status(200).json("Rest API SERVER READY")
+        } catch (error) {
+            res.status(500).json(error)
+        }
+    })
 
-app.get('/ping', (_req: Request, res: Response) => {
-  return res.send('pong 🏓')
-})
+    app.use('/authenticate',authRoute)
+    app.use(RouterMiddleware.routerMiddleware)
+    app.use('/users',userRoute)
+    app.listen(port,()=>{
+        console.log(`REST API SERVER READY AT http:localhost:${port}`);
+    })
+}
 
-app.listen(port, () => {
-  return console.log(`Server is listening on ${port}`)
-})
+
+
+start(app)
