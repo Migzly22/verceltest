@@ -14,9 +14,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
-const user_1 = __importDefault(require("./routes/user"));
-const middleware_1 = __importDefault(require("./middlewares/middleware"));
-const authentication_1 = __importDefault(require("./routes/authentication"));
 const port = 8080;
 const app = (0, express_1.default)();
 const start = (app) => __awaiter(void 0, void 0, void 0, function* () {
@@ -30,9 +27,9 @@ const start = (app) => __awaiter(void 0, void 0, void 0, function* () {
             res.status(500).json(error);
         }
     });
-    app.use('/authenticate', authentication_1.default);
-    app.use(middleware_1.default.routerMiddleware);
-    app.use('/users', user_1.default);
+    //app.use('/authenticate',authRoute)
+    //app.use(RouterMiddleware.routerMiddleware)
+    //app.use('/users',userRoute)
     app.listen(port, () => {
         console.log(`REST API SERVER READY AT http:localhost:${port}`);
     });

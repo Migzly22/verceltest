@@ -18,9 +18,9 @@ const start = async (app: Application) => {
         }
     })
 
-    app.use('/authenticate',authRoute)
-    app.use(RouterMiddleware.routerMiddleware)
-    app.use('/users',userRoute)
+    //app.use('/authenticate',authRoute)
+    //app.use(RouterMiddleware.routerMiddleware)
+    //app.use('/users',userRoute)
     app.listen(port,()=>{
         console.log(`REST API SERVER READY AT http:localhost:${port}`);
     })
