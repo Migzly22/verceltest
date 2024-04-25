@@ -43,7 +43,9 @@ class Users extends sequelize_1.Model {
 Users.modelName = 'Users';
 exports.default = Users;
 let options = {
-    sequelize: new sequelize_1.Sequelize(process.env.POSGRES_URL),
+    sequelize: new sequelize_1.Sequelize(process.env.POSGRES_URL, {
+        dialectModule: require('pg')
+    }),
     tableName: Users.modelName,
     schema: 'public',
     paranoid: true

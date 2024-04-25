@@ -34,7 +34,9 @@ export default class Users extends Model{
 }
 
 let options: InitOptions = {
-    sequelize: new Sequelize(process.env.POSGRES_URL!),
+    sequelize: new Sequelize(process.env.POSGRES_URL!,{
+        dialectModule: require('pg')
+    }),
     tableName: Users.modelName,
     schema:'public',
     paranoid : true
